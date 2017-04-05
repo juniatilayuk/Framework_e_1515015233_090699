@@ -12,37 +12,21 @@ use App\matakuliah;
 
 class JadwaMatakuliahController extends Controller
 {
+    protected informasi = 'Gagal Melakukan Aksi';
     public function awal(){
-        return view('jadwa_matakuliah.awal', ['data'=>jadwa_matakuliah::all()]);
+        $semuajadwalmatakuliah = jadwa_matakuliah::all();
+        return view('jadwa_matakuliah.awal',compact(semuajadwalmatakuliah));
     }
 public function tambah(){
-    $dosen = Dosen::all();
-    $daftar = array('' => '');
-    foreach($dosen as $temp)
-        $daftar[$temp->id] = $temp->nama;
-    return View::make('jadwa_matakuliah.tambah', compact('daftar'));
+    $mahasiswa = new mahasiswa;
+    $ruangan = new ruangan;
+    $semuajadwalmatakuliah = new dose_matakuliah;
+    return view('jadwa_matakuliah.tambah',compact('mahasiswa','ruangan','dose_matakuliah'));
     }
 
 public function simpan(Request $input){
-    $set = Input::get('id');
-
-    $nama = Nama::where('id', $set)->get();
-    $title = Title::where('id', $set)->get();
-
-    switch (Input::get('type')) {
-        case 'nama':
-            $return = '<option value=""> Nama Dosen .....</option>';
-            foreach ($nama as $temp) 
-                $return = "<option value='$temp->id>$temp->nama</option>";
-            return $return;
-            break;
-        case 'title':
-            $return = '<option value=""> Matakuliah .....</option>';
-            foreach ($title as $temp) 
-                $return = "<option value='$temp->id'>$temp->title</option>";
-            return $return;
-            break;
-        endswitch;
+    $jadwa_matakuliah = new jadwa_matakuliah($input->only('ruangan_id','dosen_matakuliah_id'))
+    if($jadwa_matakuliah->)
     }
 public function edit($id){
     $jadwa_matakuliah = jadwa_matakuliah::find($id);
