@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Mahasiswa;
 use App\Pengguna;
 
+use App\Http\Requests\MahasiswaRequest;
+
 class MahasiswaController extends Controller
 {
 

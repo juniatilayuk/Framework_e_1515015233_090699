@@ -10,9 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Http\request;
+
 Route::get('/', function(){
 	return view('master');
 });
+
+
+Route::get('UjiHas','RelationshipRebornController@UjiHas');
+Route::get('UjiDosentHave','RelationshipRebornController@UjiDosentHave');
 
 Route::get('pengguna', 'PenggunaController@awal');
 Route::get('pengguna/tambah', 'PenggunaController@tambah');
@@ -65,5 +71,22 @@ Route::post('dosen_matakuliah/edit/{dosen_matakuliah}', 'Dosen_MatakuliahControl
 Route::get('dosen_matakuliah/hapus/{dosen_matakuliah}', 'Dosen_MatakuliahController@hapus');
 
 
-Route::get('jadwal_matakuliah', 'Jadwal_MatakuliahController@awal');
-Route::get('jadwal_matakuliah/tambah', 'Jadwal_MatakuliahController@tambah');
+Route::get('/',function (Illuminate\Http\request $request)
+{
+	echo "ini adalah request dari method get". $request->nama;
+});
+
+
+
+Route::get('/',function ()
+{
+	echo form::open(['url'=>'/']).
+		form::label('nama').
+		form::text('nama',null).
+		form::submit('kirim').
+		form::close();
+});
+Route::post('/',function (Request $request)
+{
+	echo "Hasil dari form input tadi nama : ". $request->nama;
+});
